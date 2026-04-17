@@ -116,11 +116,6 @@
 	</build>
 
 	<distributionManagement>
-		<repository>
-			<id>dev</id>
-			<url>file://jarstaging</url>
-		</repository>
-		
     <repository>
         <id>nexus</id>
         <url>http://13.235.254.247:8081/nexus/content/repositories/releases/</url>
