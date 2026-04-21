@@ -28,7 +28,7 @@ spec:
           image: nikhilmalgotra/demo-app:latest
           imagePullPolicy: Always
           ports:
-            - containerPort: 8080
+            - containerPort: 8000
           resources:
             requests:
               cpu: "200m"
@@ -39,13 +39,13 @@ spec:
           livenessProbe:
             httpGet:
               path: /
-              port: 8080
+              port: 8000
             initialDelaySeconds: 30
             periodSeconds: 10
           readinessProbe:
             httpGet:
               path: /
-              port: 8080
+              port: 8000
             initialDelaySeconds: 30
             periodSeconds: 10   
 
@@ -62,6 +62,6 @@ spec:
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 8080
+      targetPort: 8000
   type: ClusterIP
 
