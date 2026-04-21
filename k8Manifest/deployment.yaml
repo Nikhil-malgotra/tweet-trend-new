@@ -1,1 +1,67 @@
+#Namespace
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: webapp
+
+---
+#Deployment
+apiVersion: apps/v1
+kind: Deployment  
+metadata:
+  name: tweetTrend-deployment
+  namespace: webapp
+spec:
+  replicas: 2
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: tweetTrend
+  template:
+    metadata:
+      labels:
+        app: tweetTrend
+    spec:
+      serviceAccountName: jenkins
+      containers:
+        - name: tweetTrend
+          image: nikhilmalgotra/demo-app:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              cpu: "200m"
+              memory: "256Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 10   
+
+---
+#service
+apiVersion: v1
+kind: Service
+metadata:
+  name: tweetTrend-svc
+  namespace: webapp
+spec:
+  selector:
+   app: tweetTrend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: ClusterIP
 
