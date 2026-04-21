@@ -118,12 +118,12 @@
 	<distributionManagement>
     <repository>
         <id>nexus</id>
-        <url>http://3.110.94.52:8081/nexus/content/repositories/releases/</url>
+        <url>http://13.206.143.191:8081/nexus/content/repositories/releases/</url>
     </repository>
 
     <snapshotRepository>
         <id>nexus</id>
-        <url>http://3.110.94.52:8081/nexus/content/repositories/snapshots/</url>
+        <url>http://13.206.143.191:8081/nexus/content/repositories/snapshots/</url>
     </snapshotRepository>
 </distributionManagement>
 
