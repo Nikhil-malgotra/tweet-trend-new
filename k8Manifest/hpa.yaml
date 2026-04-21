@@ -1,1 +1,26 @@
-
+# HPA
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: tweetTrend-hpa
+  namespace: webapp
+spec:
+  minReplicas: 2
+  maxReplicas: 6
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: tweetTrend-deployment
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target: 
+          type: Utilization
+          averageUtilization: 40
+    - type: Resource
+      resource:
+        name: memory  
+        target: 
+          type: Utilization
+          averageUtilization: 40
