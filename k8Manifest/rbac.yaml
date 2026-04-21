@@ -1,1 +1,44 @@
+#RBAC SVC account
+apiVersion: v1 
+kind: ServiceAccount
+metadata:
+  name: jenkins
+  namespace: webapp
 
+---
+# RBAC Role
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: jenkins-role
+  namespace: webapp
+rules:
+  - apiGroups:
+      - "" 
+      - apps 
+      - autoscaling 
+    resources:
+      - pods
+      - services
+      - deployments
+      - replicasets
+      - configmaps
+      - secrets
+      - horizontalpodautoscalers
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+
+---
+#RBAC Role Binding
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: jenkins-roleBinding
+  namespace: webapp
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: jenkins-role
+subjects:
+  - namespace: webapp
+    kind: ServiceAccount
+    name: jenkins
