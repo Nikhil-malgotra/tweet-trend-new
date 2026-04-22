@@ -2,7 +2,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: tweetTrend-ingress
+  name: tweettrend-ingress
   namespace: webapp
 spec:
   ingressClassName: nginx 
@@ -13,6 +13,6 @@ spec:
         pathType: Prefix
         backend:
          service: 
-          name: tweetTrend-svc
+          name: tweettrend-svc
           port: 
            number: 80
