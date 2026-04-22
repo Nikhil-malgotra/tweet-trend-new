@@ -2,22 +2,22 @@
 apiVersion: apps/v1
 kind: Deployment  
 metadata:
-  name: tweetTrend-deployment
+  name: tweettrend-deployment
   namespace: webapp
 spec:
   replicas: 2
   revisionHistoryLimit: 2
   selector:
     matchLabels:
-      app: tweetTrend
+      app: tweettrend
   template:
     metadata:
       labels:
-        app: tweetTrend
+        app: tweettrend
     spec:
       serviceAccountName: jenkins
       containers:
-        - name: tweetTrend
+        - name: tweettrend
           image: nikhilmalgotra/demo-app:latest
           imagePullPolicy: Always
           ports:
@@ -47,11 +47,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: tweetTrend-svc
+  name: tweettrend-svc
   namespace: webapp
 spec:
   selector:
-   app: tweetTrend
+   app: tweettrend
   ports:
     - protocol: TCP
       port: 80
